@@ -1,108 +1,3 @@
-        <div id="telefonos" class="pantalla bg-white">
-            <div class="top-bar-global">
-                <div class="left-action">
-                    <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
-                </div>
-                <div class="right-logo"><span>mi</span>Argentina</div>
-            </div>
-            <div style="padding: 18px 0 0 0;">
-                <div style="display:flex; flex-direction:column; gap:22px;">
-                    <div class="tel-card">
-                        <div class="tel-num">911</div>
-                        <div class="tel-desc">Central de emergencias nacional</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">144</div>
-                        <div class="tel-desc">Víctimas de violencia</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">107</div>
-                        <div class="tel-desc">Emergencias Médicas</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">100</div>
-                        <div class="tel-desc">Bomberos</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">102</div>
-                        <div class="tel-desc">La línea de las chicas y los chicos</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">103</div>
-                        <div class="tel-desc">Defensa Civil</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                    <div class="tel-card">
-                        <div class="tel-num">106</div>
-                        <div class="tel-desc">Emergencia Náutica</div>
-                        <div class="tel-icon"><i class="material-icons">call</i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <style>
-        .tel-card {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-            margin: 0 12px;
-            padding: 18px 18px 18px 0;
-            gap: 18px;
-            min-height: 60px;
-            position: relative;
-        }
-        .tel-num {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #3630ba;
-            background: #f7f7ff;
-            border-radius: 12px;
-            min-width: 70px;
-            text-align: center;
-            padding: 10px 0;
-            margin-right: 10px;
-        }
-        .tel-desc {
-            font-size: 1.1rem;
-            color: #222;
-            flex: 1;
-            font-weight: 400;
-            margin-left: 8px;
-        }
-        .tel-icon {
-            color: #bdbdbd;
-            font-size: 1.7rem;
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tel-icon .material-icons {
-            font-size: 1.7rem;
-        }
-        </style>
-    <div id="novedades" class="pantalla bg-white">
-        <div class="top-bar-global">
-            <div class="left-action">
-                <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
-            </div>
-            <div class="right-logo"><span>mi</span>Argentina</div>
-        </div>
-        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0; width:100%;">
-            <div style="width:100%; max-width:100vw; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px 20px 0 20px;">
-                <img src="notita.png" alt="Sin novedades" style="width:120px; height:120px; margin-bottom:30px; margin-top:30px; opacity:0.9;">
-                <div style="font-size:16px; color:#222; text-align:center; margin-bottom:30px;">No hay novedades para mostrar en<br>este momento</div>
-                <button class="btn btn-primary" style="max-width:320px; border-radius:24px; font-size:15px; font-weight:400;" onclick="mostrar('dashboard')">VOLVER AL INICIO</button>
-            </div>
-        </div>
-    </div>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -158,7 +53,6 @@ body {
 }
 
 .pantalla {
-    /* Pantallas como capas absolutas para animar deslizamientos */
     position: absolute;
     top: 0;
     left: 0;
@@ -172,7 +66,7 @@ body {
     scrollbar-width: none;
     transition: transform 320ms cubic-bezier(.22,.98,.26,1);
     will-change: transform;
-    transform: translateX(100%); /* por defecto fuera a la derecha */
+    transform: translateX(100%);
 }
 .pantalla::-webkit-scrollbar { display: none; }
 .pantalla.bg-white { background: white; }
@@ -258,7 +152,6 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 .btn-limpiar { background: #e0e0e0; color: #333; }
 .btn-firmar { background: var(--primary-blue); color: white; }
 
-/* Controles para mover la foto del documento en la vista Tramites */
 .photo-move-controls { width: 140px; margin: 0 auto 8px; display: grid; grid-template-columns: 36px 36px 36px; grid-template-rows: 36px 36px 36px; gap: 6px; justify-content: center; align-items: center; }
 .photo-move-controls button { background: rgba(0,0,0,0.06); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .photo-move-controls button .material-icons { font-size: 18px; color: var(--text-dark); }
@@ -269,7 +162,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 .card-turnos img { height: 92px; width: auto; margin: 0; object-fit: contain; }
 .card-turnos-info { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .card-turnos p { color: #1b1b1b; font-size: 14px; font-weight: 600; margin: 0 0 10px 0; }
-    .btn-solicitar { background: var(--primary-blue); border: none; border-radius: 999px; padding: 8px 20px; cursor: pointer; color: #fff; font-size: 13px; font-weight: 400; font-family: 'Roboto', sans-serif; display: inline-block; box-shadow: 0 6px 14px rgba(50,52,204,0.12); }
+.btn-solicitar { background: var(--primary-blue); border: none; border-radius: 999px; padding: 8px 20px; cursor: pointer; color: #fff; font-size: 13px; font-weight: 400; font-family: 'Roboto', sans-serif; display: inline-block; box-shadow: 0 6px 14px rgba(50,52,204,0.12); }
 
 .card-credenciales { background: #cbecd7; margin: 0 20px 8px 20px; border-radius: 10px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; }
 .card-credenciales .cred-text { margin: 0; color: #000; max-width: 65%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
@@ -300,7 +193,6 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 .nav-item.active span { color: var(--primary-blue); }
 .nav-item span { color: #666; font-size: 10px; font-weight: 700; margin-top: 6px; transition: 0.3s; }
 .nav-item img { width: 26px; height: 26px; object-fit: contain; transition: 0.3s; }
-
 
 .dni-view-content { background: white; flex: 1; display: flex; flex-direction: column; }
 .user-full-name { font-size: 14px; color: var(--text-gray); text-transform: uppercase; padding: 20px; margin: 0; }
@@ -340,8 +232,6 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 .qr-accordion .left { display: flex; align-items: center; }
 .qr-accordion .material-icons-outlined { color: var(--primary-blue); margin-right: 15px; }
 
-
-/* DESACTIVAR DNI */
 .desactivar-container { padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; background-color: #f5f5f5; }
 .desactivar-card { background: white; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; width: 100%; max-width: 340px; box-sizing: border-box; }
 .desactivar-title { font-size: 16px; font-weight: bold; color: #000; margin-bottom: 15px; }
@@ -354,6 +244,12 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 .detalle-item span { font-size: 12px; color: #999; font-weight: 400; margin-bottom: 6px; }
 .detalle-item strong { font-size: 15px; color: #222; font-weight: 700; }
 .detalle-item.full { grid-column: 1 / -1; }
+
+.tel-card { display: flex; align-items: center; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); margin: 0 12px; padding: 18px 18px 18px 0; gap: 18px; min-height: 60px; position: relative; }
+.tel-num { font-size: 2.2rem; font-weight: 700; color: #3630ba; background: #f7f7ff; border-radius: 12px; min-width: 70px; text-align: center; padding: 10px 0; margin-right: 10px; }
+.tel-desc { font-size: 1.1rem; color: #222; flex: 1; font-weight: 400; margin-left: 8px; }
+.tel-icon { color: #bdbdbd; font-size: 1.7rem; margin-left: 10px; display: flex; align-items: center; justify-content: center; }
+.tel-icon .material-icons { font-size: 1.7rem; }
 </style>
 </head>
 <body>
@@ -395,23 +291,28 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
         <div style="flex: 1; overflow-y: auto; padding-bottom: 20px; padding-top: 20px;">
 
             <div class="dni-container" style="transform: scale(0.9); margin-top: -15px;">
-                <div class="dni-card-container">
+                <div class="dni-card-container" onclick="this.classList.toggle('flipped')">
                     <div class="dni-card-flipper">
                         <div class="dni-front">
                             <img id="reg_prev_foto_img" class="dni-foto-usuario" src="" alt="Foto" style="background-color: #eee; z-index: 5;">
                             
-                            <div class="dni-texto pos-apellido"><div class="dni-value" id="reg_prev_apellido">MURIAS</div></div>
-                            <div class="dni-texto pos-nombre"><div class="dni-value" id="reg_prev_nombre">SANTIAGO</div></div>
-                            <div class="dni-texto pos-sexo"><div class="dni-value" id="reg_prev_sexo">M</div></div>
-                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="reg_prev_nacionalidad">ARGENTINA</div></div>
-                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="reg_prev_ejemplar">A</div></div>
-                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="reg_prev_nacimiento">21 FEB/ FEB 2007</div></div>
-                            <div class="dni-texto pos-emision"><div class="dni-value" id="reg_prev_emision">10 ABR/ APR 2025</div></div>
-                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="reg_prev_vencimiento">10 ABR/ APR 2040</div></div>
-                            <div class="dni-texto pos-documento"><div class="dni-value" id="reg_prev_documento">47.181.730</div></div>
-                            <div class="dni-texto pos-tramite"><div class="dni-value" id="reg_prev_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="reg_prev_apellido"></div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="reg_prev_nombre"></div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="reg_prev_sexo"></div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="reg_prev_nacionalidad"></div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="reg_prev_ejemplar"></div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="reg_prev_nacimiento"></div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="reg_prev_emision"></div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="reg_prev_vencimiento"></div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="reg_prev_documento"></div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="reg_prev_tramite" style="font-size: 11px;"></div></div>
                             
-                            <img id="reg_prev_firma_img" src="" alt="" style="position: absolute; top: 100px; right: 30px; width: 80px; height: auto; z-index: 5;">
+                            <img id="reg_prev_firma_img" src="" alt="" style="position: absolute; top: 10px; right: 40px; width: 80px; height: auto; z-index: 5;">
+                        </div>
+                        <div class="dni-back">
+                            <img src="dorso.png" alt="Dorso DNI" style="width:100%;position:absolute;top:0;left:0;z-index:0;">
+                            <span class="DNI_text" style="position:absolute; top:25px; left:25px; font-size:11px; font-family:Arial, sans-serif; font-weight:400; color:#222; text-transform: uppercase; z-index:1;">Domicilio: <span id="dni_domicilio_val" style="font-weight:400;"></span></span>
+                            <div id="dni_mrz" style="position:absolute; left:20px; bottom:20px; font-size:14.6151px; font-family:Arial, sans-serif; font-weight:400; color:#111; line-height:16.6151px; white-space:pre; letter-spacing: 1.5px; z-index:1;"></div>
                         </div>
                     </div>
                 </div>
@@ -419,9 +320,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 
             <div style="text-align: center; color: #666; font-size: 15px; margin-bottom: 20px;">Crear cuenta — completá tus datos</div>
 
-            <!-- Foto y controles: colocados arriba del formulario para ver preview en tiempo real -->
             <div style="padding: 0 20px 12px 20px;">
-                
                 <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                     <div class="photo-move-controls" aria-label="Mover foto del documento">
                         <button style="grid-column: 2; grid-row: 1;" onclick="movePrevPhoto('up')"><i class="material-icons">arrow_upward</i></button>
@@ -450,20 +349,21 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 
                 <div class="input-box">
                     <label>Nombre</label>
-                    <input id="reg_editNombre" class="box-input" type="text" value="SANTIAGO">
+                    <input id="reg_editNombre" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Apellido</label>
-                    <input id="reg_editApellido" class="box-input" type="text" value="MURIAS">
+                    <input id="reg_editApellido" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Número de Documento</label>
-                    <input id="reg_editDni" class="box-input" type="number" value="47181730">
+                    <input id="reg_editDni" class="box-input" type="number" value="">
                 </div>
                 <div style="display: flex; gap: 15px;">
                     <div class="input-box" style="flex: 1;">
                         <label>Sexo</label>
                         <select id="reg_editSexo" class="box-select">
+                            <option value="" selected>Seleccionar</option>
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
                             <option value="X">No binario</option>
@@ -471,16 +371,12 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                     </div>
                     <div class="input-box" style="flex: 1;">
                         <label>Nacionalidad</label>
-                        <input id="reg_editNacionalidad" class="box-input" type="text" value="ARGENTINA">
+                        <input id="reg_editNacionalidad" class="box-input" type="text" value="">
                     </div>
                 </div>
                 <div class="input-box">
-                    <label>Lugar de nacimiento</label>
-                    <input id="reg_editLugarNac" class="box-input" type="text" value="ARGENTINA">
-                </div>
-                <div class="input-box">
                     <label>Domicilio</label>
-                    <input id="reg_editDomicilio" class="box-input" type="text" value="BARRIO LOMAS DE TERRADA M D C 2">
+                    <input id="reg_editDomicilio" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Foto de Perfil</label>
@@ -488,11 +384,11 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                 </div>
                 <div class="input-box">
                     <label>Fecha de Nacimiento</label>
-                    <input id="reg_editNacimiento" class="box-input" type="text" value="21 FEB/ FEB 2007">
+                    <input id="reg_editNacimiento_date" class="box-input" type="date" style="width: 100%;">
                 </div>
                 <div class="input-box">
                     <label>Fecha de Emisión</label>
-                    <input id="reg_editEmision" class="box-input" type="text" value="10 ABR/ APR 2025">
+                    <input id="reg_editEmision_date" class="box-input" type="date" style="width: 100%;">
                 </div>
                 <div class="input-box" style="padding-bottom: 12px;">
                     <label>Firma aquí</label>
@@ -507,7 +403,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
         </div>
     </div>
 
-    <div id="dashboard" class="pantalla bg-white">
+    <div id="dashboard" class="pantalla activa bg-white">
         <div class="top-bar-global">
             <div class="left-action">
                 <i class="material-icons">menu</i>
@@ -521,7 +417,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
         </div>
         
         <div class="greeting-section">
-            <div class="greeting">¡Hola, <span id="dashNombre">SANTIAGO</span>!</div>
+            <div class="greeting">¡Hola, <span id="dashNombre">Usuario</span>!</div>
         </div>
 
         <div class="card-turnos">
@@ -593,7 +489,6 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                 <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
                 <h2 style="font-size: 16px; margin-left: 10px;">Documentos</h2>
             </div>
-            <div class="right-logo"><span>mi</span>Argentina</div>
         </div>
         
         <div style="flex: 1; padding: 8px 10px;">
@@ -609,7 +504,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 20px; margin-bottom: 20px;">
                         <div style="display: flex; flex-direction: column;">
                             <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Documento</span>
-                            <strong id="docDniNum" style="font-size: 13px; color: #222; font-weight: 600;">47181730</strong>
+                            <strong id="docDniNum" style="font-size: 13px; color: #222; font-weight: 600;">--</strong>
                         </div>
                         <div style="display: flex; flex-direction: column;">
                             <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Fecha de vencimiento</span>
@@ -617,11 +512,11 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                         </div>
                         <div style="display: flex; flex-direction: column;">
                             <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Nombre</span>
-                            <strong id="docNombrePila" style="font-size: 13px; color: #222; font-weight: 600;">SANTIAGO</strong>
+                            <strong id="docNombrePila" style="font-size: 13px; color: #222; font-weight: 600;">--</strong>
                         </div>
                         <div style="display: flex; flex-direction: column;">
                             <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Apellido</span>
-                            <strong id="docApellidoPila" style="font-size: 13px; color: #222; font-weight: 600;">MURIAS</strong>
+                            <strong id="docApellidoPila" style="font-size: 13px; color: #222; font-weight: 600;">--</strong>
                         </div>
                     </div>
                     <button style="background: var(--primary-blue); color: white; border: none; border-radius: 25px; padding: 12px; width: 100%; font-weight: bold; font-size: 14px; cursor: pointer;" onclick="mostrar('pinScreen')">Ver DNI Digital</button>
@@ -633,10 +528,10 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
             <div class="nav-item active" onclick="marcarNav(this, 'inicio'); mostrar('dashboard')">
                 <img src="inicio_azul.png" alt="Inicio" data-base="inicio"><span>Inicio</span>
             </div>
-            <div class="nav-item" onclick="marcarNav(this, 'novedades')">
+            <div class="nav-item" onclick="marcarNav(this, 'novedades'); mostrar('novedades')">
                 <img src="novedades_gris.png" alt="Novedades" data-base="novedades"><span>Novedades</span>
             </div>
-            <div class="nav-item" onclick="marcarNav(this, 'telefonos')">
+            <div class="nav-item" onclick="marcarNav(this, 'telefonos'); mostrar('telefonos')">
                 <img src="telefonos_gris.png" alt="Teléfonos" data-base="telefonos"><span>Teléfonos</span>
             </div>
             <div class="nav-item" onclick="marcarNav(this, 'tina')">
@@ -656,23 +551,28 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
         <div style="flex: 1; overflow-y: auto; padding-bottom: 20px; padding-top: 20px;">
             
             <div class="dni-container" style="transform: scale(0.9); margin-top: -15px;">
-                <div class="dni-card-container">
+                <div class="dni-card-container" onclick="this.classList.toggle('flipped')">
                     <div class="dni-card-flipper">
                         <div class="dni-front">
                             <img id="prev_foto_img" class="dni-foto-usuario" src="" alt="Foto" style="background-color: #eee; z-index: 5;">
                             
-                            <div class="dni-texto pos-apellido"><div class="dni-value" id="prev_apellido">MURIAS</div></div>
-                            <div class="dni-texto pos-nombre"><div class="dni-value" id="prev_nombre">SANTIAGO</div></div>
-                            <div class="dni-texto pos-sexo"><div class="dni-value" id="prev_sexo">M</div></div>
-                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="prev_nacionalidad">ARGENTINA</div></div>
-                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="prev_ejemplar">A</div></div>
-                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="prev_nacimiento">21 FEB/ FEB 2007</div></div>
-                            <div class="dni-texto pos-emision"><div class="dni-value" id="prev_emision">10 ABR/ APR 2025</div></div>
-                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="prev_vencimiento">10 ABR/ APR 2040</div></div>
-                            <div class="dni-texto pos-documento"><div class="dni-value" id="prev_documento">47.181.730</div></div>
-                            <div class="dni-texto pos-tramite"><div class="dni-value" id="prev_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="prev_apellido"></div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="prev_nombre"></div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="prev_sexo"></div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="prev_nacionalidad"></div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="prev_ejemplar"></div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="prev_nacimiento"></div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="prev_emision"></div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="prev_vencimiento"></div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="prev_documento"></div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="prev_tramite" style="font-size: 11px;"></div></div>
                             
                             <img id="prev_firma_img" src="" alt="" style="position: absolute; bottom: 35px; right: 25px; width: 80px; height: auto; z-index: 5;">
+                        </div>
+                        <div class="dni-back">
+                            <img src="dorso.png" alt="Dorso DNI" style="width:100%;position:absolute;top:0;left:0;z-index:0;">
+                            <span class="DNI_text" style="position:absolute; top:25px; left:25px; font-size:11px; font-family:Arial, sans-serif; font-weight:400; color:#222; text-transform: uppercase; z-index:1;">Domicilio: <span id="dni_domicilio_val" style="font-weight:400;"></span></span>
+                            <div id="dni_mrz" style="position:absolute; left:20px; bottom:20px; font-size:14.6151px; font-family:Arial, sans-serif; font-weight:400; color:#111; line-height:16.6151px; white-space:pre; letter-spacing: 1.5px; z-index:1;"></div>
                         </div>
                     </div>
                 </div>
@@ -680,9 +580,7 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
 
             <div style="text-align: center; color: #666; font-size: 15px; margin-bottom: 20px;">Actualiza tus datos</div>
 
-            <!-- Foto y controles: colocados arriba del formulario para ver preview en tiempo real -->
             <div style="padding: 0 20px 12px 20px;">
-                
                 <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                     <div class="photo-move-controls" aria-label="Mover foto del documento">
                         <button style="grid-column: 2; grid-row: 1;" onclick="movePrevPhoto('up')"><i class="material-icons">arrow_upward</i></button>
@@ -701,20 +599,21 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
             <div class="form-container" style="padding-top: 0;">
                 <div class="input-box">
                     <label>Nombre</label>
-                    <input id="editNombre" class="box-input" type="text" value="SANTIAGO">
+                    <input id="editNombre" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Apellido</label>
-                    <input id="editApellido" class="box-input" type="text" value="MURIAS">
+                    <input id="editApellido" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Número de Documento</label>
-                    <input id="editDni" class="box-input" type="number" value="47181730">
+                    <input id="editDni" class="box-input" type="number" value="">
                 </div>
                 <div style="display: flex; gap: 15px;">
                     <div class="input-box" style="flex: 1;">
                         <label>Sexo</label>
                         <select id="editSexo" class="box-select">
+                            <option value="" selected>Seleccionar</option>
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
                             <option value="X">No binario</option>
@@ -722,28 +621,24 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                     </div>
                     <div class="input-box" style="flex: 1;">
                         <label>Nacionalidad</label>
-                        <input id="editNacionalidad" class="box-input" type="text" value="ARGENTINA">
+                        <input id="editNacionalidad" class="box-input" type="text" value="">
                     </div>
                 </div>
                 <div class="input-box">
-                    <label>Lugar de nacimiento</label>
-                    <input id="editLugarNac" class="box-input" type="text" value="ARGENTINA">
-                </div>
-                <div class="input-box">
                     <label>Domicilio</label>
-                    <input id="editDomicilio" class="box-input" type="text" value="BARRIO LOMAS DE TERRADA M D C 2">
+                    <input id="editDomicilio" class="box-input" type="text" value="">
                 </div>
                 <div class="input-box">
                     <label>Foto de Perfil</label>
-                    <input id="editFoto" type="file" accept="image/*" style="border: none; padding: 5px 0; background: transparent; font-size: 14px; font-family: 'Roboto', sans-serif;">
+                    <input id="editFoto" type="file" accept="image/*" style="border: none; padding: 5px 0; background: transparent; font-size: 14px; font-family: inherit;">
                 </div>
                 <div class="input-box">
                     <label>Fecha de Nacimiento</label>
-                    <input id="editNacimiento" class="box-input" type="text" value="21 FEB/ FEB 2007">
+                    <input id="editNacimiento_date" class="box-input" type="date" style="width: 100%;">
                 </div>
                 <div class="input-box">
                     <label>Fecha de Emisión</label>
-                    <input id="editEmision" class="box-input" type="text" value="10 ABR/ APR 2025">
+                    <input id="editEmision_date" class="box-input" type="date" style="width: 100%;">
                 </div>
                 <div class="input-box" style="padding-bottom: 12px;">
                     <label>Firma aquí</label>
@@ -777,35 +672,39 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
         </div>
     </div>
 
-    <div id="dniView" class="pantalla activa bg-white">
+    <div id="dniView" class="pantalla bg-white">
         <div class="top-bar-global">
             <div class="left-action">
                 <i class="material-icons" onclick="mostrar('documentos')">arrow_back</i>
                 <h2 style="font-size: 16px; margin-left: 10px;">Dni Digital</h2>
             </div>
-            <div class="right-logo"><span>mi</span>Argentina</div>
         </div>
         <div class="dni-view-content" style="padding-top: 20px;">
+            <p class="user-full-name" id="fullNameHeader"></p>
             <div class="dni-container">
                 <div class="dni-card-container" onclick="this.classList.toggle('flipped')">
                     <div class="dni-card-flipper">
                         <div class="dni-front">
                             <img id="f_foto_img" class="dni-foto-usuario" src="" alt="Foto">
                             
-                            <div class="dni-texto pos-apellido"><div class="dni-value" id="f_apellido">MURIAS</div></div>
-                            <div class="dni-texto pos-nombre"><div class="dni-value" id="f_nombre">SANTIAGO</div></div>
-                            <div class="dni-texto pos-sexo"><div class="dni-value" id="f_sexo">M</div></div>
-                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="f_nacionalidad">ARGENTINA</div></div>
-                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="f_ejemplar">A</div></div>
-                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="f_nacimiento">21 FEB/ FEB 2007</div></div>
-                            <div class="dni-texto pos-emision"><div class="dni-value" id="f_emision">10 ABR/ APR 2025</div></div>
-                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="f_vencimiento">10 ABR/ APR 2040</div></div>
-                            <div class="dni-texto pos-documento"><div class="dni-value" id="f_documento">47.181.730</div></div>
-                            <div class="dni-texto pos-tramite"><div class="dni-value" id="f_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="f_apellido"></div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="f_nombre"></div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="f_sexo"></div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="f_nacionalidad"></div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="f_ejemplar"></div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="f_nacimiento"></div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="f_emision"></div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="f_vencimiento"></div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="f_documento"></div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="f_tramite" style="font-size: 11px;"></div></div>
                             
                             <img id="f_firma_final" src="" style="position: absolute; bottom: 40px; right: 25px; width: 80px; height: auto;">
                         </div>
-                        <div class="dni-back"></div>
+                        <div class="dni-back">
+                            <img src="dorso.png" alt="Dorso DNI" style="width:100%;position:absolute;top:0;left:0;z-index:0;">
+                            <span class="DNI_text" style="position:absolute; top:25px; left:25px; font-size:11px; font-family:Arial, sans-serif; font-weight:700; color:#222; text-transform: uppercase; z-index:1;">Domicilio: <span id="dni_domicilio_val" style="font-weight:400;"></span></span>
+                            <div id="dni_mrz" style="position:absolute; left:20px; bottom:20px; font-size:14.6151px; font-family:Arial, sans-serif; font-weight:400; color:#111; line-height:16.6151px; white-space:pre; letter-spacing: 1.5px; z-index:1;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -830,10 +729,10 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
             <div class="nav-item active" onclick="marcarNav(this, 'inicio'); mostrar('dashboard')">
                 <img src="inicio_azul.png" alt="Inicio" data-base="inicio"><span>Inicio</span>
             </div>
-            <div class="nav-item" onclick="marcarNav(this, 'novedades')">
+            <div class="nav-item" onclick="marcarNav(this, 'novedades'); mostrar('novedades')">
                 <img src="novedades_gris.png" alt="Novedades" data-base="novedades"><span>Novedades</span>
             </div>
-            <div class="nav-item" onclick="marcarNav(this, 'telefonos')">
+            <div class="nav-item" onclick="marcarNav(this, 'telefonos'); mostrar('telefonos')">
                 <img src="telefonos_gris.png" alt="Teléfonos" data-base="telefonos"><span>Teléfonos</span>
             </div>
             <div class="nav-item" onclick="marcarNav(this, 'tina')">
@@ -848,16 +747,19 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                 <i class="material-icons" onclick="mostrar('dniView')">arrow_back</i>
                 <h2 style="font-size: 16px; margin-left: 10px;">Dni Digital</h2>
             </div>
-            <div class="right-logo"><span>mi</span>Argentina</div>
         </div>
         
         <div style="flex: 1; overflow-y: auto; background: white;">
             <div style="text-align: center; padding-top: 20px;">
-                <img id="det_foto" src="" alt="Foto de perfil" style="max-width: 90%; max-height: 350px; border-radius: 8px; object-fit: contain;">
+                <img id="det_foto" src="" alt="Foto de perfil" style="width:60px;height:60px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 10px auto;">
+                <div id="codigo_barra" style="width:100%;margin:0 0 20px 0;text-align:center;">
+                    <img src="codigo_barra.png" alt="Código de barras" style="width:100%;max-width:100%;height:48px;display:block;margin:0 auto;object-fit:cover;">
+                </div>
             </div>
             
-                <div class="detalle-grid">
-                    <div class="detalle-item"><span>Número de trámite</span><strong id="det_tramite">---</strong></div>
+            <div class="detalle-grid">
+                <div class="detalle-item"><span>Número de trámite</span><strong id="det_tramite">---</strong></div>
+                <div class="detalle-item"><span>DNI</span><strong id="det_dni">---</strong></div>
                 
                 <div class="detalle-item"><span>Fecha de emisión</span><strong id="det_emision">---</strong></div>
                 <div class="detalle-item"><span>Fecha de vencimiento</span><strong id="det_vencimiento">---</strong></div>
@@ -874,6 +776,70 @@ input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; borde
                 <div class="detalle-item full"><span>Lugar de nacimiento</span><strong id="det_lugarNac">---</strong></div>
                 
                 <div class="detalle-item full"><span>Domicilio</span><strong id="det_domicilio">---</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="telefonos" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+        </div>
+        <div style="padding: 18px 0 0 0;">
+            <div style="display:flex; flex-direction:column; gap:22px;">
+                <div class="tel-card">
+                    <div class="tel-num">911</div>
+                    <div class="tel-desc">Central de emergencias nacional</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">144</div>
+                    <div class="tel-desc">Víctimas de violencia</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">107</div>
+                    <div class="tel-desc">Emergencias Médicas</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">100</div>
+                    <div class="tel-desc">Bomberos</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">102</div>
+                    <div class="tel-desc">La línea de las chicas y los chicos</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">103</div>
+                    <div class="tel-desc">Defensa Civil</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+                <div class="tel-card">
+                    <div class="tel-num">106</div>
+                    <div class="tel-desc">Emergencia Náutica</div>
+                    <div class="tel-icon"><i class="material-icons">call</i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="novedades" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0; width:100%;">
+            <div style="width:100%; max-width:100vw; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px 20px 0 20px;">
+                <img src="notita.png" alt="Sin novedades" style="width:120px; height:120px; margin-bottom:30px; margin-top:30px; opacity:0.9;">
+                <div style="font-size:16px; color:#222; text-align:center; margin-bottom:30px;">No hay novedades para mostrar en<br>este momento</div>
+                <button class="btn btn-primary" style="max-width:320px; border-radius:24px; font-size:15px; font-weight:400;" onclick="mostrar('dashboard')">VOLVER AL INICIO</button>
             </div>
         </div>
     </div>
