@@ -14,19 +14,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 let datosUsuario = {
-    nombre: 'Santiago',
-    apellido: 'Murias',
-    dni: '47.181.730',
+    nombre: 'nombre',
+    apellido: 'apellido',
+    dni: '00.000.000',
     fotoURL: '',
-    sexo: 'M',
+    sexo: '-',
     nacionalidad: 'ARGENTINA',
     lugarNac: 'ARGENTINA',
-    domicilio: 'BARRIO LOMAS DE TERRADA M D C 2',
+    domicilio: 'domicilio',
     ejemplar: 'A',
-    fechaNacimiento: '21 FEB/ FEB 2009',
-    fechaEmision: '10 ABR/ APR 2025',
-    fechaVencimiento: '10 ABR/ APR 2040',
-    tramite: '00640409635\n4589'
+    fechaNacimiento: '00 MES / MES 0000',
+    fechaEmision: '00 MES / MES 0000',
+    fechaVencimiento: '00 MES / MES 0000',
+    tramite: 'tramite'
 };
 
 // ==============================================================
