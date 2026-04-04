@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mi Argentina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<style>
+:root {
+    --primary-blue: #3630ba; 
+    --primary-light: #4444ff;
+    --logo-cyan: #5ce1e6; 
+    --bg-gray: #f5f5f5;
+    --text-dark: #222222;
+    --text-gray: #666666;
+    --text-muted: #999999;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #e5e7eb; 
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    color: #333; 
+}
+
+.app-container {
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    background: var(--bg-gray);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+@media (min-width: 415px) {
+    .app-container {
+        height: 90vh;
+        max-height: 850px;
+        border-radius: 15px; 
+        border: 8px solid #222;
+    }
+}
+
+.pantalla {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    background: var(--bg-gray);
+    overflow-y: auto;
+    padding-bottom: 70px;
+    scrollbar-width: none;
+}
+.pantalla::-webkit-scrollbar { display: none; }
+.pantalla.bg-white { background: white; }
+.activa { display: flex; }
+
+.top-bar-global {
+    background: var(--primary-blue);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px 5px 20px; 
+    position: relative;
+}
+.top-bar-global .left-action { display: flex; align-items: center; width: 40px; }
+.top-bar-global .left-action .material-icons { font-size: 28px; cursor: pointer; }
+.top-bar-global .left-action h2 { margin: 0; font-size: 18px; font-weight: 500; margin-left: 15px; width: max-content;}
+
+.top-bar-global .right-logo { 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px; 
+    font-weight: 500; 
+    color: white; 
+    letter-spacing: 0.5px; 
+}
+.top-bar-global .right-logo span { color: #7ea7d8; font-weight: bold; }
+
+.top-bar-global .profile-icon-wrapper { 
+    position: relative; 
+    cursor: pointer; 
+    width: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+.profile-icon-wrapper img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+.verified-check { position: absolute; bottom: -2px; left: 0px; background: white; border-radius: 50%; width: 16px; height: 16px; display: flex; justify-content: center; align-items: center; }
+.verified-check .material-icons { color: #00E676; font-size: 16px; }
+
+.top-bar-global *, #home button { color: white; }
+
+.greeting-section { 
+    background: var(--primary-blue); 
+    color: white; 
+    padding: 10px 20px 25px 20px; 
+    border-bottom-left-radius: 12px; 
+    border-bottom-right-radius: 12px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: -1px; 
+}
+
+.greeting { font-size: 15px; font-weight: 700; margin: 0; color: #ffffff; }
+.greeting span { color: #ffffff; }
+
+.btn { width: 100%; padding: 16px; border-radius: 12px; border: none; font-size: 16px; font-weight: 500; cursor: pointer; box-sizing: border-box; text-align: center; margin-bottom: 15px; }
+.btn-primary { background: var(--primary-blue); color: white; }
+.btn-outline { background: white; border: 1px solid var(--primary-blue); color: var(--primary-blue); }
+
+#home { padding: 30px; justify-content: center; align-items: center; text-align: center; background: white;}
+.home-logo-img { width: 250px; margin-bottom: 20px; }
+.home-text-logo { font-size: 32px; color: var(--primary-blue); margin-bottom: 50px; font-weight: 500; }
+.home-text-logo span { font-weight: bold; color: #7ea7d8; }
+.home-p { font-size: 14px; color: var(--text-dark); margin-bottom: 15px; margin-top: 10px; }
+
+.form-container { padding: 30px; flex: 1; background: white; }
+.form-container h3 { color: var(--primary-blue); font-size: 24px; margin-bottom: 30px; text-align: center; }
+
+input:not(.pin-input):not(.box-input), select:not(.box-select), textarea:not(.box-textarea) { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; background: white; font-family: 'Roboto', sans-serif; }
+input:not(.pin-input):focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-blue); }
+.input-label { font-size: 12px; color: var(--text-gray); margin-bottom: 5px; display: block; font-weight: bold; }
+
+.input-box { background: #fff; border: 1px solid #dcdcdc; border-radius: 6px; padding: 8px 12px; margin-bottom: 15px; display: flex; flex-direction: column; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); }
+.input-box label { font-size: 11px; color: var(--text-gray); margin-bottom: 2px; font-weight: 600; }
+.input-box input, .input-box select, .input-box textarea { border: none; outline: none; font-size: 15px; color: var(--text-dark); width: 100%; background: transparent; padding: 0; font-family: 'Roboto', sans-serif; }
+.input-box input:focus { color: var(--primary-blue); }
+
+#firma-canvas { border: 1px dashed #bbb; border-radius: 4px; width: 100%; height: 100px; background-color: #f9f9f9; cursor: crosshair; touch-action: none; }
+.signature-actions { display: flex; justify-content: space-between; margin-top: 10px; gap: 10px; }
+.signature-actions button { flex: 1; padding: 10px; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; }
+.btn-limpiar { background: #e0e0e0; color: #333; }
+.btn-firmar { background: var(--primary-blue); color: white; }
+
+/* Controles para mover la foto del documento en la vista Tramites */
+.photo-move-controls { width: 140px; margin: 0 auto 8px; display: grid; grid-template-columns: 36px 36px 36px; grid-template-rows: 36px 36px 36px; gap: 6px; justify-content: center; align-items: center; }
+.photo-move-controls button { background: rgba(0,0,0,0.06); border: none; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.photo-move-controls button .material-icons { font-size: 18px; color: var(--text-dark); }
+.photo-size-controls { display: flex; flex-direction: column; gap: 6px; margin-left: 8px; }
+.photo-size-controls button { background: rgba(0,0,0,0.06); border: none; width: 40px; height: 36px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+
+.card-turnos { background: white; margin: -20px 20px 15px 20px; border-radius: 10px; padding: 28px 20px; display: flex; align-items: center; justify-content: center; gap: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.10); position: relative; z-index: 2; }
+.card-turnos img { height: 92px; width: auto; margin: 0; object-fit: contain; }
+.card-turnos-info { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.card-turnos p { color: #1b1b1b; font-size: 14px; font-weight: 600; margin: 0 0 10px 0; }
+    .btn-solicitar { background: var(--primary-blue); border: none; border-radius: 999px; padding: 8px 20px; cursor: pointer; color: #fff; font-size: 13px; font-weight: 400; font-family: 'Roboto', sans-serif; display: inline-block; box-shadow: 0 6px 14px rgba(50,52,204,0.12); }
+
+.card-credenciales { background: #cbecd7; margin: 0 20px 25px 20px; border-radius: 10px; padding: 20px 20px 20px 25px; display: flex; justify-content: space-between; align-items: center; }
+.card-credenciales .cred-text { margin: 0; color: #000; max-width: 65%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+.card-credenciales .cred-line1 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.card-credenciales .cred-line2 { font-size: 13px; font-weight: 400; }
+.card-credenciales img { max-height: 70px; object-fit: contain; margin-left: -51px; }
+
+.grid-title { font-size: 15px; font-weight: 700; margin: 10px 20px 15px 20px; color: #333; }
+.icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 10px; margin: 0 20px 25px 20px; }
+.grid-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; background: white; border-radius: 12px; padding: 14px 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.grid-item img { width: 34px; height: 34px; object-fit: contain; }
+.grid-item span { text-align: center; color: #000; font-size: 11px; font-weight: 400; margin-top: 10px; }
+.grid-item:active, .grid-item:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); }
+
+.horizontal-scroll-wrapper { display: flex; overflow-x: auto; gap: 15px; padding: 0 20px 30px 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.horizontal-scroll-wrapper::-webkit-scrollbar { display: none; } 
+
+.scroll-card { flex: 0 0 85%; scroll-snap-align: center; border-radius: 10px; padding: 15px; display: flex; align-items: center; }
+.card-perfil { background: #e0c6c8; } 
+.card-servicios { background: #d2d2d2; } 
+.scroll-card img { max-height: 55px; margin-right: 15px; object-fit: contain;}
+.scroll-card-content { display: flex; flex-direction: column; justify-content: center; }
+.scroll-card strong { display: block; margin-bottom: 2px; font-size: 15px; font-weight: 700; color: #333; }
+.scroll-card span { color: #000; font-size: 11px; font-weight: 400; line-height: 1.3; }
+
+.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; z-index: 1000; }
+.nav-item { display: flex; flex-direction: column; align-items: center; color: #888; cursor: pointer; transition: 0.3s;}
+.nav-item.active span { color: var(--primary-blue); }
+.nav-item span { color: #666; font-size: 10px; font-weight: 700; margin-top: 6px; transition: 0.3s; }
+.nav-item img { width: 26px; height: 26px; object-fit: contain; transition: 0.3s; }
+
+
+.dni-view-content { background: white; flex: 1; display: flex; flex-direction: column; }
+.user-full-name { font-size: 14px; color: var(--text-gray); text-transform: uppercase; padding: 20px; margin: 0; }
+.dni-container { padding: 0 20px; display: flex; justify-content: center; }
+
+.dni-card-container { perspective: 1000px; width: 350px; height: 220px; cursor: pointer; margin-bottom: 20px; }
+.dni-card-flipper { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+.dni-card-container.flipped .dni-card-flipper { transform: rotateY(180deg); }
+.dni-front, .dni-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-size: cover; background-position: center; overflow: hidden; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+
+.dni-front { z-index: 2; background-image: url('frente.png'); }
+.dni-back { transform: rotateY(180deg); background-image: url('dorso.png'); }
+
+.dni-texto { position: absolute; line-height: 1.1; }
+.dni-foto-usuario { position: absolute; top: 55px; left: 24px; width: 80px; height: 100px; object-fit: cover; }
+.dni-value { color: #000; font-family: Arial, sans-serif; font-weight: 400; letter-spacing: .1px; text-transform: uppercase; font-size: 14px; }
+
+.pos-apellido { top: 44px; left: 106px; }
+.pos-nombre { top: 66px; left: 106px; }
+.pos-sexo { top: 88px; left: 106px; }
+.pos-nacionalidad { top: 88px; left: 133px; }
+.pos-ejemplar { top: 89px; left: 256px; }
+.pos-nacimiento { top: 111px; left: 106px; }
+.pos-emision { top: 132px; left: 106px; }
+.pos-vencimiento { top: 153px; left: 106px; }
+.pos-documento { top: 184px; left: 11px; }
+.pos-documento .dni-value { font-size: 20px; font-weight: bold; letter-spacing: -0.7px; }
+.pos-tramite { top: 180px; left: 106px; }
+
+.last-update { text-align: center; font-size: 12px; color: var(--text-gray); padding: 15px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 0 20px; }
+.action-row { display: flex; margin: 0 20px; border-bottom: 1px solid #eee; }
+.action-btn { flex: 1; display: flex; align-items: center; padding: 20px 10px; color: var(--text-gray); font-size: 14px; cursor: pointer; }
+.action-btn:first-child { border-right: 1px solid #eee; }
+.action-btn .material-icons, .action-btn .material-icons-outlined { color: var(--primary-blue); margin-right: 15px; font-size: 20px; }
+
+.qr-accordion { display: flex; align-items: center; justify-content: space-between; padding: 20px; color: var(--text-dark); font-size: 14px; cursor: pointer; border-bottom: 1px solid #eee; }
+.qr-accordion .left { display: flex; align-items: center; }
+.qr-accordion .material-icons-outlined { color: var(--primary-blue); margin-right: 15px; }
+
+
+/* DESACTIVAR DNI */
+.desactivar-container { padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; background-color: #f5f5f5; }
+.desactivar-card { background: white; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; width: 100%; max-width: 340px; box-sizing: border-box; }
+.desactivar-title { font-size: 16px; font-weight: bold; color: #000; margin-bottom: 15px; }
+.desactivar-text { font-size: 12px; color: #666; margin-bottom: 25px; line-height: 1.4; }
+.btn-desact-cont { background: #3234cc; color: white; border: none; padding: 14px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 14px; margin-bottom: 12px; cursor: pointer; font-family: 'Roboto', sans-serif;}
+.btn-desact-canc { background: white; color: #3234cc; border: 1px solid #3234cc; padding: 14px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 14px; cursor: pointer; font-family: 'Roboto', sans-serif;}
+
+.detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 15px; padding: 20px; background: white; }
+.detalle-item { display: flex; flex-direction: column; }
+.detalle-item span { font-size: 12px; color: #999; font-weight: 400; margin-bottom: 6px; }
+.detalle-item strong { font-size: 15px; color: #222; font-weight: 700; }
+.detalle-item.full { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <div id="home" class="pantalla bg-white">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2933/2933116.png" class="home-logo-img" alt="Ilustración" style="opacity: 0.8;">
+            <div class="home-text-logo"><span>mi</span>Argentina</div>
+            <button class="btn btn-primary" onclick="mostrar('login')">Ingresar con mi cuenta</button>
+            <p class="home-p">¿No tenés cuenta en Mi Argentina?</p>
+            <button class="btn btn-outline" onclick="mostrar('register')">Crear una cuenta</button>
+        </div>
+    </div>
+
+    <div id="login" class="pantalla">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('home')">arrow_back</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+        </div>
+        <div class="form-container">
+            <h3>Iniciar sesión</h3>
+            <input id="loginEmail" type="email" placeholder="Correo electrónico o CUIL">
+            <input id="loginPass" type="password" placeholder="Contraseña">
+            <button class="btn btn-primary" onclick="login()">Ingresar</button>
+        </div>
+    </div>
+
+    <div id="register" class="pantalla">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('home')">arrow_back</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding-bottom: 20px; padding-top: 20px;">
+
+            <div class="dni-container" style="transform: scale(0.9); margin-top: -15px;">
+                <div class="dni-card-container">
+                    <div class="dni-card-flipper">
+                        <div class="dni-front">
+                            <img id="reg_prev_foto_img" class="dni-foto-usuario" src="" alt="Foto" style="background-color: #eee; z-index: 5;">
+                            
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="reg_prev_apellido">MURIAS</div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="reg_prev_nombre">SANTIAGO</div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="reg_prev_sexo">M</div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="reg_prev_nacionalidad">ARGENTINA</div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="reg_prev_ejemplar">A</div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="reg_prev_nacimiento">21 FEB/ FEB 2007</div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="reg_prev_emision">10 ABR/ APR 2025</div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="reg_prev_vencimiento">10 ABR/ APR 2040</div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="reg_prev_documento">47.181.730</div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="reg_prev_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            
+                            <img id="reg_prev_firma_img" src="" alt="" style="position: absolute; top: 100px; right: 30px; width: 80px; height: auto; z-index: 5;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #666; font-size: 15px; margin-bottom: 20px;">Crear cuenta — completá tus datos</div>
+
+            <!-- Foto y controles: colocados arriba del formulario para ver preview en tiempo real -->
+            <div style="padding: 0 20px 12px 20px;">
+                
+                <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                    <div class="photo-move-controls" aria-label="Mover foto del documento">
+                        <button style="grid-column: 2; grid-row: 1;" onclick="movePrevPhoto('up')"><i class="material-icons">arrow_upward</i></button>
+                        <button style="grid-column: 1; grid-row: 2;" onclick="movePrevPhoto('left')"><i class="material-icons">arrow_back</i></button>
+                        <button style="grid-column: 2; grid-row: 2; visibility: hidden;"></button>
+                        <button style="grid-column: 3; grid-row: 2;" onclick="movePrevPhoto('right')"><i class="material-icons">arrow_forward</i></button>
+                        <button style="grid-column: 2; grid-row: 3;" onclick="movePrevPhoto('down')"><i class="material-icons">arrow_downward</i></button>
+                    </div>
+                    <div class="photo-size-controls" aria-label="Ajustar tamaño de la foto">
+                        <button onclick="changePrevPhotoSize('increase')">+</button>
+                        <button onclick="changePrevPhotoSize('decrease')">−</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container" style="padding-top: 0;">
+                <h3>Crear cuenta</h3>
+                <div class="input-box">
+                    <label>Correo electrónico</label>
+                    <input id="email" type="email" placeholder="Email">
+                </div>
+                <div class="input-box">
+                    <label>Contraseña</label>
+                    <input id="password" type="password" placeholder="Contraseña">
+                </div>
+
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input id="reg_editNombre" class="box-input" type="text" value="SANTIAGO">
+                </div>
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input id="reg_editApellido" class="box-input" type="text" value="MURIAS">
+                </div>
+                <div class="input-box">
+                    <label>Número de Documento</label>
+                    <input id="reg_editDni" class="box-input" type="number" value="47181730">
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <div class="input-box" style="flex: 1;">
+                        <label>Sexo</label>
+                        <select id="reg_editSexo" class="box-select">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="X">No binario</option>
+                        </select>
+                    </div>
+                    <div class="input-box" style="flex: 1;">
+                        <label>Nacionalidad</label>
+                        <input id="reg_editNacionalidad" class="box-input" type="text" value="ARGENTINA">
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>Lugar de nacimiento</label>
+                    <input id="reg_editLugarNac" class="box-input" type="text" value="ARGENTINA">
+                </div>
+                <div class="input-box">
+                    <label>Domicilio</label>
+                    <input id="reg_editDomicilio" class="box-input" type="text" value="BARRIO LOMAS DE TERRADA M D C 2">
+                </div>
+                <div class="input-box">
+                    <label>Foto de Perfil</label>
+                    <input id="reg_editFoto" type="file" accept="image/*" style="border: none; padding: 5px 0; background: transparent; font-size: 14px; font-family: 'Roboto', sans-serif;">
+                </div>
+                <div class="input-box">
+                    <label>Fecha de Nacimiento</label>
+                    <input id="reg_editNacimiento" class="box-input" type="text" value="21 FEB/ FEB 2007">
+                </div>
+                <div class="input-box">
+                    <label>Fecha de Emisión</label>
+                    <input id="reg_editEmision" class="box-input" type="text" value="10 ABR/ APR 2025">
+                </div>
+                <div class="input-box" style="padding-bottom: 12px;">
+                    <label>Firma aquí</label>
+                    <canvas id="reg_firma_canvas"></canvas>
+                    <div class="signature-actions">
+                        <button type="button" class="btn-limpiar" onclick="limpiarFirmaRegistro()">Borrar</button>
+                        <button type="button" class="btn-firmar" onclick="guardarFirmaRegistro()">Cargar Firma</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 15px;" onclick="registrar()">Crear cuenta</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons">menu</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+            
+            <div class="profile-icon-wrapper" onclick="logout()">
+                <img src="avatar_perfil_superior.png" alt="Perfil">
+                <div class="verified-check"><i class="material-icons">check_circle</i></div>
+            </div>
+        </div>
+        
+        <div class="greeting-section">
+            <div class="greeting">¡Hola, <span id="dashNombre">SANTIAGO</span>!</div>
+        </div>
+
+        <div class="card-turnos">
+            <img src="icono_turnos_grande.png" alt="Turnos">
+            <div class="card-turnos-info">
+                <p>No tenés turnos programados.</p>
+                <button class="btn-solicitar">Solicitalo acá</button>
+            </div>
+        </div>
+
+        <div class="card-credenciales">
+            <div class="cred-text">
+                <div class="cred-line1">¡Todas tus credenciales</div>
+                <div class="cred-line2">están al día!</div>
+            </div>
+            <img src="dni_verde.png" alt="DNI Verde">
+        </div>
+
+        <div class="grid-title">¿Qué necesitás hoy?</div>
+        
+        <div class="icon-grid">
+            <div class="grid-item" onclick="mostrar('documentos')"><img src="documentos.png" alt="Documentos"><span>Documentos</span></div>
+            <div class="grid-item"><img src="vehiculos.png" alt="Vehículos"><span>Vehículos</span></div>
+            <div class="grid-item"><img src="salud.png" alt="Salud"><span>Salud</span></div>
+            <div class="grid-item"><img src="trabajo.png" alt="Trabajo"><span>Trabajo</span></div>
+            <div class="grid-item"><img src="cobros.png" alt="Cobros"><span>Cobros</span></div>
+            <div class="grid-item" onclick="mostrar('tramites')"><img src="tramites.png" alt="Trámites"><span>Trámites</span></div>
+            <div class="grid-item"><img src="turnos.png" alt="Turnos"><span>Turnos</span></div>
+            <div class="grid-item"><img src="hijos.png" alt="Hijos"><span>Hijos</span></div>
+        </div>
+
+        <div class="horizontal-scroll-wrapper">
+            <div class="scroll-card card-perfil">
+                <img src="icono_perfil_completar.png" alt="Perfil">
+                <div class="scroll-card-content">
+                    <strong>Completá tu perfil</strong>
+                    <span>Mantené todos tus datos actualizados</span>
+                </div>
+            </div>
+            
+            <div class="scroll-card card-servicios">
+                <img src="suscribi.png" alt="Suscribir">
+                <div class="scroll-card-content">
+                    <strong>Suscribí servicios</strong>
+                    <span>Elegí los servicios que querés ver en la aplicación</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="marcarNav(this, 'inicio'); mostrar('dashboard')">
+                <img src="inicio_azul.png" alt="Inicio" data-base="inicio"><span>Inicio</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'novedades')">
+                <img src="novedades_gris.png" alt="Novedades" data-base="novedades"><span>Novedades</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'telefonos')">
+                <img src="telefonos_gris.png" alt="Teléfonos" data-base="telefonos"><span>Teléfonos</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'tina')">
+                <img src="tina_gris.png" alt="Tina" data-base="tina"><span>Tina</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="documentos" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
+                <h2 style="font-size: 16px; margin-left: 10px;">Documentos</h2>
+            </div>
+            <div class="right-logo"></div>
+        </div>
+        
+        <div style="flex: 1; padding: 8px 10px;">
+            <div style="background: white; border: 1px solid #eaeaea; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
+                <div onclick="toggleDoc()" style="display: flex; align-items: center; padding: 12px 12px; cursor: pointer;">
+                    <img src="documentos.png" alt="Documentos" style="width: 36px; height: 36px; margin-right: 15px; object-fit: contain;">
+                    <h3 style="margin: 0; font-size: 14px; color: #222; font-weight: 600; flex: 1;">Documento Nacional de Identidad (DNI)</h3>
+                    <i class="material-icons" id="doc-arrow" style="color: #666; transition: transform 0.3s;">keyboard_arrow_down</i>
+                </div>
+                
+                <div id="doc-content" style="display: none; padding: 0 12px 20px 12px;">
+                    <hr style="border: none; border-top: 1px solid #eee; margin: 0 0 15px 0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 20px; margin-bottom: 20px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Documento</span>
+                            <strong id="docDniNum" style="font-size: 13px; color: #222; font-weight: 600;">47181730</strong>
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Fecha de vencimiento</span>
+                            <strong id="docVencimiento" style="font-size: 13px; color: #222; font-weight: 600;">-</strong>
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Nombre</span>
+                            <strong id="docNombrePila" style="font-size: 13px; color: #222; font-weight: 600;">SANTIAGO</strong>
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 11px; color: #888; margin-bottom: 3px;">Apellido</span>
+                            <strong id="docApellidoPila" style="font-size: 13px; color: #222; font-weight: 600;">MURIAS</strong>
+                        </div>
+                    </div>
+                    <button style="background: var(--primary-blue); color: white; border: none; border-radius: 25px; padding: 12px; width: 100%; font-weight: bold; font-size: 14px; cursor: pointer;" onclick="mostrar('pinScreen')">Ver DNI Digital</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="marcarNav(this, 'inicio'); mostrar('dashboard')">
+                <img src="inicio_azul.png" alt="Inicio" data-base="inicio"><span>Inicio</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'novedades')">
+                <img src="novedades_gris.png" alt="Novedades" data-base="novedades"><span>Novedades</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'telefonos')">
+                <img src="telefonos_gris.png" alt="Teléfonos" data-base="telefonos"><span>Teléfonos</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'tina')">
+                <img src="tina_gris.png" alt="Tina" data-base="tina"><span>Tina</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="tramites" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dashboard')">arrow_back</i>
+            </div>
+            <div class="right-logo"><span>mi</span>Argentina</div>
+        </div>
+        
+        <div style="flex: 1; overflow-y: auto; padding-bottom: 20px; padding-top: 20px;">
+            
+            <div class="dni-container" style="transform: scale(0.9); margin-top: -15px;">
+                <div class="dni-card-container">
+                    <div class="dni-card-flipper">
+                        <div class="dni-front">
+                            <img id="prev_foto_img" class="dni-foto-usuario" src="" alt="Foto" style="background-color: #eee; z-index: 5;">
+                            
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="prev_apellido">MURIAS</div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="prev_nombre">SANTIAGO</div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="prev_sexo">M</div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="prev_nacionalidad">ARGENTINA</div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="prev_ejemplar">A</div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="prev_nacimiento">21 FEB/ FEB 2007</div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="prev_emision">10 ABR/ APR 2025</div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="prev_vencimiento">10 ABR/ APR 2040</div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="prev_documento">47.181.730</div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="prev_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            
+                            <img id="prev_firma_img" src="" alt="" style="position: absolute; bottom: 35px; right: 25px; width: 80px; height: auto; z-index: 5;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #666; font-size: 15px; margin-bottom: 20px;">Actualiza tus datos</div>
+
+            <!-- Foto y controles: colocados arriba del formulario para ver preview en tiempo real -->
+            <div style="padding: 0 20px 12px 20px;">
+                
+                <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                    <div class="photo-move-controls" aria-label="Mover foto del documento">
+                        <button style="grid-column: 2; grid-row: 1;" onclick="movePrevPhoto('up')"><i class="material-icons">arrow_upward</i></button>
+                        <button style="grid-column: 1; grid-row: 2;" onclick="movePrevPhoto('left')"><i class="material-icons">arrow_back</i></button>
+                        <button style="grid-column: 2; grid-row: 2; visibility: hidden;"></button>
+                        <button style="grid-column: 3; grid-row: 2;" onclick="movePrevPhoto('right')"><i class="material-icons">arrow_forward</i></button>
+                        <button style="grid-column: 2; grid-row: 3;" onclick="movePrevPhoto('down')"><i class="material-icons">arrow_downward</i></button>
+                    </div>
+                    <div class="photo-size-controls" aria-label="Ajustar tamaño de la foto">
+                        <button onclick="changePrevPhotoSize('increase')">+</button>
+                        <button onclick="changePrevPhotoSize('decrease')">−</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container" style="padding-top: 0;">
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input id="editNombre" class="box-input" type="text" value="SANTIAGO">
+                </div>
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input id="editApellido" class="box-input" type="text" value="MURIAS">
+                </div>
+                <div class="input-box">
+                    <label>Número de Documento</label>
+                    <input id="editDni" class="box-input" type="number" value="47181730">
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <div class="input-box" style="flex: 1;">
+                        <label>Sexo</label>
+                        <select id="editSexo" class="box-select">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="X">No binario</option>
+                        </select>
+                    </div>
+                    <div class="input-box" style="flex: 1;">
+                        <label>Nacionalidad</label>
+                        <input id="editNacionalidad" class="box-input" type="text" value="ARGENTINA">
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>Lugar de nacimiento</label>
+                    <input id="editLugarNac" class="box-input" type="text" value="ARGENTINA">
+                </div>
+                <div class="input-box">
+                    <label>Domicilio</label>
+                    <input id="editDomicilio" class="box-input" type="text" value="BARRIO LOMAS DE TERRADA M D C 2">
+                </div>
+                <div class="input-box">
+                    <label>Foto de Perfil</label>
+                    <input id="editFoto" type="file" accept="image/*" style="border: none; padding: 5px 0; background: transparent; font-size: 14px; font-family: 'Roboto', sans-serif;">
+                </div>
+                <div class="input-box">
+                    <label>Fecha de Nacimiento</label>
+                    <input id="editNacimiento" class="box-input" type="text" value="21 FEB/ FEB 2007">
+                </div>
+                <div class="input-box">
+                    <label>Fecha de Emisión</label>
+                    <input id="editEmision" class="box-input" type="text" value="10 ABR/ APR 2025">
+                </div>
+                <div class="input-box" style="padding-bottom: 12px;">
+                    <label>Firma aquí</label>
+                    <canvas id="firma-canvas"></canvas>
+                    <div class="signature-actions">
+                        <button type="button" class="btn-limpiar" onclick="limpiarFirma()">Borrar</button>
+                        <button type="button" class="btn-firmar" onclick="guardarFirma()">Cargar Firma</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 15px;" onclick="guardarEdicion()">Finalizar Actualización</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pinScreen" class="pantalla" style="background-color: #f5f5f5;">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('documentos')">arrow_back</i>
+                <h2 style="font-size: 16px; margin-left: 10px; color: white;">Dni Digital</h2>
+            </div>
+            <div class="right-logo"></div>
+        </div>
+
+        <div style="flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 8px 0 20px 0;">
+            <div style="background: white; border-radius: 12px; padding: 22px 16px; width: calc(100% - 24px); margin: 6px 12px 0 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left;">
+                <h3 style="margin: 0 0 18px 0; font-size: 16px; color: #222; font-weight: bold;">Ingresá tu PIN de acceso</h3>
+                <input type="tel" id="pinInput" maxlength="6" placeholder="123456" style="width: 100%; border: none; border-bottom: 1px solid #888; font-size: 18px; padding: 5px 0; margin-bottom: 24px; outline: none; color: #333; letter-spacing: 2px;">
+                <button style="background: var(--primary-blue); color: white; border: none; border-radius: 12px; padding: 12px; width: 100%; font-weight: bold; font-size: 14px; cursor: pointer;" onclick="validarPin()">Ingresar</button>
+                <div style="text-align: center; color: var(--primary-blue); font-size: 13px; margin-top: 14px; cursor: pointer;">Olvidé mi PIN</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dniView" class="pantalla activa bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('documentos')">arrow_back</i>
+                <h2 style="font-size: 16px; margin-left: 10px;">Dni Digital</h2>
+            </div>
+            <div class="right-logo"></div>
+        </div>
+        <div class="dni-view-content" style="padding-top: 20px;">
+            <div class="dni-container">
+                <div class="dni-card-container" onclick="this.classList.toggle('flipped')">
+                    <div class="dni-card-flipper">
+                        <div class="dni-front">
+                            <img id="f_foto_img" class="dni-foto-usuario" src="" alt="Foto">
+                            
+                            <div class="dni-texto pos-apellido"><div class="dni-value" id="f_apellido">MURIAS</div></div>
+                            <div class="dni-texto pos-nombre"><div class="dni-value" id="f_nombre">SANTIAGO</div></div>
+                            <div class="dni-texto pos-sexo"><div class="dni-value" id="f_sexo">M</div></div>
+                            <div class="dni-texto pos-nacionalidad"><div class="dni-value" id="f_nacionalidad">ARGENTINA</div></div>
+                            <div class="dni-texto pos-ejemplar"><div class="dni-value" id="f_ejemplar">A</div></div>
+                            <div class="dni-texto pos-nacimiento"><div class="dni-value" id="f_nacimiento">21 FEB/ FEB 2007</div></div>
+                            <div class="dni-texto pos-emision"><div class="dni-value" id="f_emision">10 ABR/ APR 2025</div></div>
+                            <div class="dni-texto pos-vencimiento"><div class="dni-value" id="f_vencimiento">10 ABR/ APR 2040</div></div>
+                            <div class="dni-texto pos-documento"><div class="dni-value" id="f_documento">47.181.730</div></div>
+                            <div class="dni-texto pos-tramite"><div class="dni-value" id="f_tramite" style="font-size: 11px;">00640409635<br>4589</div></div>
+                            
+                            <img id="f_firma_final" src="" style="position: absolute; bottom: 40px; right: 25px; width: 80px; height: auto;">
+                        </div>
+                        <div class="dni-back"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="last-update" id="lblUltimaAct">Última actualización: hoy</div>
+            <div class="action-row">
+                <div class="action-btn" onclick="mostrar('verDetalle')"><i class="material-icons">visibility</i>Ver detalle</div>
+                <div class="action-btn" onclick="mostrar('desactivarDni')" style="color: var(--primary-blue);"><i class="material-icons" style="color: var(--primary-blue);">close</i>Desactivar DNI</div>
+            </div>
+            
+            <div class="qr-accordion" onclick="toggleQR()">
+                <div class="left"><i class="material-icons-outlined">qr_code_scanner</i>Verifica código QR</div>
+                <i class="material-icons" id="qr-arrow" style="color: var(--text-muted); transition: transform 0.3s;">keyboard_arrow_down</i>
+            </div>
+            
+            <div id="qr-content" style="display: none; text-align: center; padding: 20px; border-bottom: 1px solid #eee;">
+                <img src="qr.png" alt="QR Code" style="width: 180px; height: 180px;">
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="marcarNav(this, 'inicio'); mostrar('dashboard')">
+                <img src="inicio_azul.png" alt="Inicio" data-base="inicio"><span>Inicio</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'novedades')">
+                <img src="novedades_gris.png" alt="Novedades" data-base="novedades"><span>Novedades</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'telefonos')">
+                <img src="telefonos_gris.png" alt="Teléfonos" data-base="telefonos"><span>Teléfonos</span>
+            </div>
+            <div class="nav-item" onclick="marcarNav(this, 'tina')">
+                <img src="tina_gris.png" alt="Tina" data-base="tina"><span>Tina</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="verDetalle" class="pantalla bg-white">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dniView')">arrow_back</i>
+                <h2 style="font-size: 16px; margin-left: 10px;">Dni Digital</h2>
+            </div>
+            <div class="right-logo"></div>
+        </div>
+        
+        <div style="flex: 1; overflow-y: auto; background: white;">
+            <div style="text-align: center; padding-top: 20px;">
+                <img id="det_foto" src="" alt="Foto de perfil" style="max-width: 90%; max-height: 350px; border-radius: 8px; object-fit: contain;">
+            </div>
+            
+                <div class="detalle-grid">
+                    <div class="detalle-item"><span>Número de trámite</span><strong id="det_tramite">---</strong></div>
+                
+                <div class="detalle-item"><span>Fecha de emisión</span><strong id="det_emision">---</strong></div>
+                <div class="detalle-item"><span>Fecha de vencimiento</span><strong id="det_vencimiento">---</strong></div>
+                
+                <div class="detalle-item full"><span>Nombre</span><strong id="det_nombre">---</strong></div>
+                <div class="detalle-item full"><span>Apellido</span><strong id="det_apellido">---</strong></div>
+                
+                <div class="detalle-item full"><span>Sexo</span><strong id="det_sexo">---</strong></div>
+                
+                <div class="detalle-item full"><span>Fecha de nacimiento</span><strong id="det_nacimiento">---</strong></div>
+                
+                <div class="detalle-item full"><span>Nacionalidad</span><strong id="det_nacionalidad">---</strong></div>
+                
+                <div class="detalle-item full"><span>Lugar de nacimiento</span><strong id="det_lugarNac">---</strong></div>
+                
+                <div class="detalle-item full"><span>Domicilio</span><strong id="det_domicilio">---</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="desactivarDni" class="pantalla" style="background-color: #f5f5f5;">
+        <div class="top-bar-global">
+            <div class="left-action">
+                <i class="material-icons" onclick="mostrar('dniView')">arrow_back</i>
+                <h2 style="font-size: 16px; margin-left: 10px;">Dni Digital</h2>
+            </div>
+            <div class="right-logo"></div>
+        </div>
+        
+        <div class="desactivar-container">
+            <div class="desactivar-card">
+                <div style="color: #3234cc; margin-bottom: 20px;">
+                    <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <path d="M12 11h7"></path>
+                        <path d="M12 15h7"></path>
+                        <circle cx="7" cy="13" r="3"></circle>
+                        <circle cx="18" cy="6" r="4" fill="white" stroke="#e53935"></circle>
+                        <path d="M18 4v2" stroke="#e53935"></path>
+                        <path d="M18 9v.01" stroke="#e53935"></path>
+                    </svg>
+                </div>
+                
+                <div class="desactivar-title">¿Estás seguro que querés desactivar este DNI?</div>
+                <div class="desactivar-text">
+                    Recordá que si desactivas un DNI digital, vas a dejar de verlo en este dispositivo.<br>
+                    Esta opción estará disponible solamente 3 veces al año.
+                </div>
+                
+                <button class="btn-desact-cont" onclick="javascript:void(0)">Continuar</button>
+                <button class="btn-desact-canc" onclick="mostrar('dniView')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
